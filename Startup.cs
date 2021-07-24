@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GlassApplication.Repositories;
+using GlassApplication.Repository;
 
 namespace GlassApplication
 {
@@ -35,6 +37,9 @@ namespace GlassApplication
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IGlassRepository, GlassRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {

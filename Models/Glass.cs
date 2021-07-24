@@ -10,7 +10,7 @@ namespace GlassApplication.Models
     [Table("Glasses")]
     public class Glass
     {
-        public int GlassId { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("Order")]
         public int OrderId { get; set; }
