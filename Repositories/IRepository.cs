@@ -7,8 +7,10 @@ namespace GlassApplication.Repository
 {
     public interface IRepository<TEntity> where TEntity : class, new()
     {
-        IQueryable<TEntity> GetAll();
-        Task<TEntity> AddAsync(TEntity entity);
+        IList<TEntity> ReadAll();
+        TEntity ReadById(int id);
+        Task<TEntity> CreateAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
+        void Delete(TEntity entity);
     }
 }

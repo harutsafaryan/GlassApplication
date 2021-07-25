@@ -161,9 +161,9 @@ namespace GlassApplication.Controllers
         }
 
 
-        public async Task<IActionResult> GlassArea(int id)
+        public IActionResult GlassArea(int id)
         {
-            double result = await _glassRepository.GlassArea(1);
+            double result =  _glassRepository.GlassArea(1);
             return Ok(result);
         }
     }

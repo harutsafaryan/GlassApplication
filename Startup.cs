@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GlassApplication.Repositories;
 using GlassApplication.Repository;
+using Microsoft.Extensions.Logging;
 
 namespace GlassApplication
 {
@@ -30,8 +31,10 @@ namespace GlassApplication
         public void ConfigureServices(IServiceCollection services)  
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                       .UseLoggerFactory(DbCommandConsoleLoggerFactory)
+                       .EnableSensitiveDataLogging());
+                
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -95,5 +98,10 @@ namespace GlassApplication
                 endpoints.MapRazorPages();
             });
         }
+
+        private static readonly ILoggerFactory DbCommandConsoleLoggerFactory =
+            LoggerFactory.Create(builder =>
+            builder.AddConsole()
+                    .AddFilter((category, Level) => category == DbLoggerCategory.Database.Command.Name && Level == LogLevel.Information));
     }
 }

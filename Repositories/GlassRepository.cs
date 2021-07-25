@@ -15,33 +15,33 @@ namespace GlassApplication.Repositories
         {
         }
 
-        public Task<Glass> GetGlassByIdAsync(int id)
+        public Glass GetGlassById(int id)
         {
-            return GetAll().FirstOrDefaultAsync(x => x.Id==id);
+            return ReadAll().FirstOrDefault(x => x.Id==id);
         }
 
-        public async Task<IList<Glass>> GetGlassesByOrderIdAsync(int id)
+        public List<Glass> GetGlassesByOrderId(int id)
         {
-            return await GetAll().Where(x => x.OrderId == id).ToListAsync();
+            return ReadAll().Where(x => x.OrderId == id).ToList();
         }
 
-        public async Task<double> GlassArea(int id)
+        public double GlassArea(int id)
         {
-            Glass trackedEntity = await GetGlassByIdAsync(id);
+            Glass trackedEntity = GetGlassById(id);
             double result = trackedEntity.Height * trackedEntity.Width / 1_000_000;
             return result;
         }
 
-        public async Task<double> GlassPerimeter(int id)
+        public double GlassPerimeter(int id)
         {
-            Glass trackedEntity = await GetGlassByIdAsync(id);
+            Glass trackedEntity = GetGlassById(id);
             double result = (trackedEntity.Height + trackedEntity.Width) * 0.002;
             return result;
         }
 
-        public async Task<double> GlassWeight(int id)
+        public double GlassWeight(int id)
         {
-            Glass trackedEntity = await GetGlassByIdAsync(id);
+            Glass trackedEntity = GetGlassById(id);
             double result = trackedEntity.Height * trackedEntity.Width * trackedEntity.Thickness * 2.5;
             result = result / 1_000_000;
             return result;

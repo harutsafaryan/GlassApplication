@@ -9,10 +9,10 @@ namespace GlassApplication.Repositories
 {
     public interface IGlassRepository : IRepository<Glass>
     {
-        Task<Glass> GetGlassByIdAsync(int id);
-        Task<IList<Glass>> GetGlassesByOrderIdAsync(int id);
-        Task<double> GlassArea(int id);
-        Task<double> GlassPerimeter(int id);
-        Task<double> GlassWeight(int id);
+        Glass GetGlassById(int id);
+        List<Glass> GetGlassesByOrderId(int id);
+        double GlassArea(int id);
+        double GlassPerimeter(int id);
+        double GlassWeight(int id);
     }
 }
