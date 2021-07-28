@@ -43,6 +43,7 @@ namespace GlassApplication
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IGlassRepository, GlassRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {
