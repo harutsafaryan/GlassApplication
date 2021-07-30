@@ -55,6 +55,9 @@ namespace GlassApplication.Controllers
         public IActionResult Create()
         {
             ViewData["DepartamentId"] = new SelectList(_context.Departments, "Id", "Id");
+            IList<string> statusList = new List<string> { "Draft", "Accepted", "InProcess", "Canceled", "Finished" };
+            var list = new SelectList(statusList);
+            ViewBag.Status = list;
             return View();
         }
 

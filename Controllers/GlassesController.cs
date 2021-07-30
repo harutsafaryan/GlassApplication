@@ -166,5 +166,12 @@ namespace GlassApplication.Controllers
             double result =  _glassRepository.GlassArea(1);
             return Ok(result);
         }
+
+        public IActionResult GetGlassesByOrderId(int id)
+        {
+            var glasses = _glassRepository.GetGlassesByOrderId(id);
+            return View(glasses);
+        }
+            
     }
 }
